@@ -5,7 +5,12 @@ require "./word_vector_generator.rb"
 MAX_TRIAL = 5
 
 if $PROGRAM_NAME == __FILE__
-  word_vec_generator = WordVectorGenerator.new(:dictionary)
+  method = :default
+  if ARGV[0] == "dictionary"
+    method = :dictionary
+  end
+  ARGV.clear
+  word_vec_generator = WordVectorGenerator.new(method)
   word_vec = word_vec_generator.generate
 
   kata_db = KataDB.new(word_vec)
